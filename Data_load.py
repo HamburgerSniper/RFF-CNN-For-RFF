@@ -1,14 +1,12 @@
 # Importing dependencies
 
 
-import numpy as np
-import scipy
 import os
-import matplotlib.pyplot as plt
+
+import numpy as np
+from scipy import complex128
 from scipy.signal import find_peaks
-from scipy import complex128, float64
-from numpy import array, argmax
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder
 
 distances = ['2ft', '8ft', '14ft', '20ft', '26ft', '32ft', '38ft', '44ft', '50ft', '56ft', '62ft']
 path_datafolder = '/home/ajendoubi/PycharmProjects/github_repository_PFE/raw_dataset/'

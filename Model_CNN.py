@@ -2,20 +2,10 @@
 
 
 import tensorflow as tf
-import numpy as np
-import os
-import matplotlib.pyplot as plt
-import scipy
-import random
-from scipy import complex128, float64
-from scipy.signal import find_peaks
-from tensorflow import keras
-
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv1D, MaxPooling1D
+from tensorflow.keras.layers import Dense, Dropout, Flatten
+from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
-from matplotlib import pyplot
 
 print('*************************** Building the model***********************************')
 

@@ -1,7 +1,4 @@
-import numpy as np
-from pathlib import Path
-
-from Data_load import generate_path, extract_id, extract_list_ID, read_convert_data, load_data
+from Data_load import generate_path, extract_list_ID, load_data
 from Model_CNN import model
 from Train_and_Evaluate import train_model, plot_results, plot_confusion_matrix
 

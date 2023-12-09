@@ -1,23 +1,9 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from numpy import array
-from numpy import argmax
-import tensorflow as tf
-import matplotlib.pyplot as plt
-import scipy
-import random
-
-from scipy import complex128, float64
-from scipy.signal import find_peaks
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Conv1D, MaxPooling1D
-from tensorflow.keras.optimizers import Adam
-from matplotlib import pyplot
 from sklearn import metrics
 from sklearn.model import KFold
-from sklearn.metrics import confusion_matrix
-from Data_load import one_hot_encode
+
 from Model_CNN import model
 
 
