@@ -1,4 +1,3 @@
-
 import numpy as np
 from pathlib import Path
 
@@ -14,26 +13,19 @@ List_ID = extract_list_ID(path)
 print(len(List_ID))
 number_devices = len(List_ID)
 
-
 # Initialize the model
 model = model(number_devices)
 
-#Initiate the labeled input data
+# Initiate the labeled input data
 X, Y = load_data(path)
 
-#Train the model
+# Train the model
 history = train_model(X, Y)
 
-#Plot the results of the performance of the model
+# Plot the results of the performance of the model
 
 plot_results(history)
 labels = [i for i in range(number_devices)]
-X_test = X[:(len(X)//5)]
-Y_test = Y[:(len(Y)//2):]
+X_test = X[:(len(X) // 5)]
+Y_test = Y[:(len(Y) // 2):]
 plot_confusion_matrix(X_test, Y_test, labels)
-
-
-
-
-
-

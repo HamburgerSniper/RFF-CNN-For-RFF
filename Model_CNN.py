@@ -1,7 +1,6 @@
 # Importing dependencies
 
 
-
 import tensorflow as tf
 import numpy as np
 import os
@@ -18,18 +17,13 @@ from tensorflow.keras.layers import Conv1D, MaxPooling1D
 from tensorflow.keras.optimizers import Adam
 from matplotlib import pyplot
 
-
-
-
-
 print('*************************** Building the model***********************************')
+
 
 # Building model
 
 
 def model(number_devices):
-
-
     model = Sequential()
 
     # 1st Block
@@ -79,6 +73,5 @@ def model(number_devices):
                   # loss='binary_crossentropy',
                   loss='CategoricalCrossentropy',
                   metrics=['accuracy'])
-
 
     return model

@@ -1,7 +1,6 @@
 # Importing dependencies
 
 
-
 import numpy as np
 import scipy
 import os
@@ -11,25 +10,25 @@ from scipy import complex128, float64
 from numpy import array, argmax
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
-
 distances = ['2ft', '8ft', '14ft', '20ft', '26ft', '32ft', '38ft', '44ft', '50ft', '56ft', '62ft']
 path_datafolder = '/home/ajendoubi/PycharmProjects/github_repository_PFE/raw_dataset/'
 
 
-def extract_id (file_name):
+def extract_id(file_name):
     """ This function allows to extract the device's ID out of the file's name
      :parameter file_name : the name of the file in question """
     index_id_st = file_name.find('312')
     elt_md = file_name[index_id_st:]
     index_id_end = elt_md.find('_')
-    device_id = file_name[index_id_st:index_id_st+index_id_end]
+    device_id = file_name[index_id_st:index_id_st + index_id_end]
     return device_id
 
+
 def generate_path(path_datafolder, distance):
-    return(path_datafolder+distance+'/')
+    return (path_datafolder + distance + '/')
 
 
-def extract_list_ID (path):
+def extract_list_ID(path):
     """ This function the generation of a list of device IDs present in a folder
     :parameter path : math fo the folder containing all the files recorded from the same distance """
     List_ID = []
@@ -129,24 +128,19 @@ def one_hot_encode(Y):
     return onehot_encoded
 
 
-
-#Testing
+# Testing
 path = generate_path(path_datafolder, distances[0])
 List_ID = extract_list_ID(path)
 print(len(List_ID))
 
 
-
-#Loading and converting data
-
+# Loading and converting data
 
 
-def read_convert_data (path):
+def read_convert_data(path):
     """  This function reads I/Q samples from the binary files as numpy arrays,
      generate I and Q separate sequences, filter non-significant peaks ,
      normalize data and save it as numpy arrays in numpy files for later use   """
-
-
 
     for elt in os.listdir(path):
         data_path = generate_path(path, elt)
@@ -172,17 +166,15 @@ def read_convert_data (path):
                 Q1 = Filter_peaks(Q1)
                 Q1 = normalize(Q1)
 
-
-
                 # Saving the numpy arrays into files
 
-                I_npy = os.path.join(path,"npy_files", str(ID), I_file)
-                Q_npy = os.path.join(path, "npy_files", str(ID),  Q_file)
+                I_npy = os.path.join(path, "npy_files", str(ID), I_file)
+                Q_npy = os.path.join(path, "npy_files", str(ID), Q_file)
 
                 np.save(I1, I_npy)
                 np.save(Q1, Q_npy)
 
-            else :
+            else:
                 recording_2 = read_overlapping(record_path, 128)
 
                 #  Generating I and Q npy files names
@@ -208,17 +200,16 @@ def read_convert_data (path):
                 np.save(Q2, Q_npy)
 
 
-def load_data (path):
+def load_data(path):
     """ This function loads pre-processed I and Q data from numpy files and reshape them
     into the input shape to be fed to the neural network
     :parameter path_npy : the path to the numpy files of I and Q"""
-
 
     X = np.array([])
     Y = np.array([])
 
     for elt in os.listdir(path):
-        path_per_ID = os.path.join(path , 'elt')
+        path_per_ID = os.path.join(path, 'elt')
         for elt in os.listdir(path_per_ID):
             data_files = [f for f in os.listdir(path_per_ID) if f.endswith('sigmf-data')]
             for f in data_files:
@@ -229,38 +220,20 @@ def load_data (path):
 
                 # Generating I and Q sequences and pre-process them
 
-
                 I = generate_I(recording)
-                I = Filter_peaks(I) #Filter the non-significant peaks within the I sequence
-                I = normalize(I) # Normalize the values of I
-
+                I = Filter_peaks(I)  # Filter the non-significant peaks within the I sequence
+                I = normalize(I)  # Normalize the values of I
 
                 Q = generate_Q(recording)
-                Q = Filter_peaks(Q)   # Filter the non-significant peaks within the Q sequence
+                Q = Filter_peaks(Q)  # Filter the non-significant peaks within the Q sequence
                 Q = normalize(Q)  # Normalize the values of Q
 
-
                 m = reshape_array(I, Q)
-                X = np.concatenate((X,m), axis=0)
+                X = np.concatenate((X, m), axis=0)
                 Y = np.concatenate((Y, label * np.ones(len(I))))
-
 
                 # Configure Y into one hot encoded vector for multiclassification purposes
 
                 Y = one_hot_encode(Y)
 
     return X, Y
-
-
-
-
-
-
-
-
-
-
-
-
-
-
